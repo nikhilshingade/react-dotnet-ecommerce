@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 
 import cartService from "../../services/cartService";
+import CartPageSkeleton from "./CartPageSkeleton";
 
 function CartPage() {
   const [cart, setCart] = useState(null);
@@ -86,7 +87,7 @@ function CartPage() {
   };
 
   if (!cart) {
-    return <Container sx={{ py: 5 }}>Loading...</Container>;
+    return <CartPageSkeleton/>
   }
 
   const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
@@ -158,10 +159,10 @@ function CartPage() {
                   <Stack
                     sx={{
                       display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  gap: 1.5,
-                    }}
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 1.5,
+                    }}  
                   >
                     <Button
                       variant="outlined"
