@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-
-import {
-  Container,
-} from "@mui/material";
-
+import ProductGridSkeleton from "../../components/products/ProductGridSkeleton";
+import { Container,} from "@mui/material";
 import productService from "../../services/productService";
 import categoryService from "../../services/categoryService";
-
-
 import ProductGrid from "../../components/products/ProductGrid";
 import ProductFilters from "../../components/products/ProductFilters";
 
@@ -17,7 +12,7 @@ function HomePage() {
 
   const [categories, setCategories] =
     useState([]);
-    
+  const [loading, setLoading] = useState(true); 
 
   const [selectedCategory,
     setSelectedCategory] = useState("");
@@ -43,27 +38,27 @@ function HomePage() {
 
   const loadProducts = async () => {
     try {
+      setLoading(true);
       const params = {};
-
       if (selectedCategory) {
-        params.categoryId =
-          selectedCategory;
+        params.categoryId = selectedCategory;
       }
-
-      const data =
-        await productService.getAll(
-          params
-        );
-
+      const data = await productService.getAll(params);
       setProducts(data);
     } catch (error) {
       console.error(error);
+    }finally{
+      setLoading(false);
     }
   };
 
   return (
-    <Container sx={{ py: 5 }}>
-      <ProductGrid products={products}/>
+  <Container sx={{ py: 5 }}>
+      {loading ? (
+        <ProductGridSkeleton />
+      ) : (
+        <ProductGrid products={products} />
+      )}
     </Container>
   );
 }

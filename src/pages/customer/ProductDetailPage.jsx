@@ -11,6 +11,7 @@ import {
   Box,
   Paper,
   Stack,
+  Skeleton,
 } from "@mui/material";
 
 import cartService from "../../services/cartService";
@@ -59,7 +60,66 @@ function ProductDetailPage() {
   };
 
   if (!product) {
-  return <div>Loading...</div>;
+  return (
+      <Container maxWidth="lg" sx={{ py: 5 }}>
+        <Paper
+          sx={{
+            p: 4,
+            borderRadius: 4,
+          }}
+        >
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={6}>
+              <Skeleton
+                variant="rectangular"
+                height={320}
+                sx={{
+                  borderRadius: 4,
+                }}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Stack spacing={2}>
+                <Skeleton
+                  width={120}
+                  height={40}
+                />
+
+                <Skeleton
+                  width="80%"
+                  height={60}
+                />
+
+                <Skeleton
+                  width={180}
+                  height={50}
+                />
+
+                <Skeleton
+                  width={150}
+                  height={40}
+                />
+
+                <Skeleton
+                  width="100%"
+                  height={100}
+                />
+
+                <Skeleton
+                  variant="rectangular"
+                  width={220}
+                  height={55}
+                  sx={{
+                    borderRadius: 3,
+                  }}
+                />
+              </Stack>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Container>
+    );
   }
 
 return (

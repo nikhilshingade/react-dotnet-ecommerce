@@ -29,10 +29,10 @@ function CartPage() {
   }, []);
 
   const loadCart = async () => {
-  try {
-    const data = await cartService.getCart();
+    try {
+      const data = await cartService.getCart();
       setCart(data);
-    const totalItems = data.items?.length || 0;
+      const totalItems = data.items?.length || 0;
       setCartCount(totalItems);
     } catch (error) {
       console.error(error);
@@ -51,58 +51,59 @@ function CartPage() {
 
   const handleIncrease = async (item) => {
     try {
-            await cartService.updateCartItem({
-            productId: item.productId,
-            quantity: item.quantity + 1,
-            });
-            loadCart();
-        } catch (error) {
-            console.error(error);
-        }
-    };
+      await cartService.updateCartItem({
+        productId: item.productId,
+        quantity: item.quantity + 1,
+      });
+      loadCart();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const handleDecrease = async (item) => {
-        try {
-            await cartService.updateCartItem({
-            productId: item.productId,
-            quantity: item.quantity - 1,
-            });
-            loadCart();
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    const handleRemove = async (item) => {
-        try {
-            await cartService.updateCartItem({
-            productId: item.productId,
-            quantity: 0,
-            });
+  const handleDecrease = async (item) => {
+    try {
+      await cartService.updateCartItem({
+        productId: item.productId,
+        quantity: item.quantity - 1,
+      });
+      loadCart();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleRemove = async (item) => {
+    try {
+      await cartService.updateCartItem({
+        productId: item.productId,
+        quantity: 0,
+      });
 
-            loadCart();
-        } catch (error) {
-            console.error(error);
-        }
-    };
+      loadCart();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (!cart) {
-    return (
-      <Container sx={{ py: 5 }}>
-        Loading...
-      </Container>
-    );
+    return <Container sx={{ py: 5 }}>Loading...</Container>;
   }
 
-  const totalItems = cart.items.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <Container maxWidth="lg" sx={{ py: 5 }}>
-      <Typography variant="h4" sx={{fontWeight: 800,mb: "20px", color: "primary.main",letterSpacing: "-0.5px",}}>
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: 800,
+          mb: "20px",
+          color: "primary.main",
+          letterSpacing: "-0.5px",
+        }}
+      >
         🛒 Shopping Cart
-     </Typography>
+      </Typography>
 
       <Grid container spacing={4}>
         {/* Left Side */}
@@ -118,12 +119,10 @@ function CartPage() {
                   gap: 2,
                   alignItems: "center",
                   transition: "0.3s",
-                  boxShadow:
-                    "0 4px 20px rgba(0,0,0,0.08)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
 
                   "&:hover": {
-                    transform:
-                      "translateY(-2px)",
+                    transform: "translateY(-2px)",
                   },
                 }}
               >
@@ -139,83 +138,86 @@ function CartPage() {
                   }}
                 />
 
-                <Box flex={1} sx={{display:"flex",flexDirection:"column",gap:"10px",width:"100%"}}>
-                  <Typography
-                    variant="h6"
-                    fontWeight={700}
-                  >
+                <Box
+                  flex={1}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                    width: "100%",
+                  }}
+                >
+                  <Typography variant="h6" fontWeight={700}>
                     {item.productName}
                   </Typography>
 
-                  <Typography
-                    color="text.secondary"
-                  >
-                    ₹
-                    {item.price.toLocaleString()}
+                  <Typography color="text.secondary">
+                    ₹{item.price.toLocaleString()}
                   </Typography>
 
-                  <Stack sx={{width:"100%",display:"flex",flexDirection:"row",alignItems:"center", justifyContent:"space-between"}}>
+                  <Stack
+                    sx={{
+                      display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 1.5,
+                    }}
+                  >
                     <Button
-                        variant="outlined"
-                        onClick={() => handleDecrease(item)}
-                        sx={{
+                      variant="outlined"
+                      onClick={() => handleDecrease(item)}
+                      sx={{
                         minWidth: 39,
                         width: 39,
                         height: 34,
                         p: 0,
                         borderRadius: 1,
-                        }}
+                      }}
                     >
-                        <RemoveIcon />
+                      <RemoveIcon />
                     </Button>
 
                     <Typography
-                        minWidth={30}
-                        textAlign="center"   
-                        sx={{fontSize:"20px",fontWeight:600,}}                     
+                      minWidth={30}
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: 600,
+                        textAlign: "center",
+                      }}
                     >
-                        {item.quantity}
+                      {item.quantity}
                     </Typography>
 
                     <Button
-                        variant="outlined"
-                        onClick={() => handleIncrease(item)}
-                        sx={{
+                      variant="outlined"
+                      onClick={() => handleIncrease(item)}
+                      sx={{
                         minWidth: 39,
                         width: 39,
                         height: 34,
                         p: 0,
                         borderRadius: 1,
-                        }}
+                      }}
                     >
-                        <AddIcon />
+                      <AddIcon />
                     </Button>
 
                     <Button
-                        color="error"
-                        onClick={() =>
+                      color="error"
+                      onClick={() =>
                         handleDecrease({
-                            ...item,
-                            quantity: 1,
+                          ...item,
+                          quantity: 1,
                         })
-                        }
-                        sx={{  }}
+                      }
+                      sx={{}}
                     >
-                        <DeleteOutlineIcon />
+                      <DeleteOutlineIcon />
                     </Button>
-                    
                   </Stack>
 
-                  <Typography
-                    mt={1}
-                    color="primary"
-                    fontWeight={700}
-                  >
-                    ₹
-                    {(
-                      item.price *
-                      item.quantity
-                    ).toLocaleString()}
+                  <Typography mt={1} color="primary" fontWeight={700}>
+                    ₹{(item.price * item.quantity).toLocaleString()}
                   </Typography>
                 </Box>
               </Paper>
@@ -231,40 +233,48 @@ function CartPage() {
               borderRadius: 4,
               position: "sticky",
               top: 100,
-              boxShadow:
-                "0 4px 20px rgba(0,0,0,0.08)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
             }}
           >
-            <Typography variant="h6" fontWeight={700}  mb={3}>
+            <Typography variant="h6" fontWeight={700} mb={3}>
               Order Summary
             </Typography>
 
             <Divider sx={{ mb: 2 }} />
 
-            <Box sx={{display:"flex",flexDirection:"row",gap:"10px"}}>
-              <Typography sx={{fontWeight:700}}>
-                Total Items :  
-              </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+              <Typography sx={{ fontWeight: 700 }}>Total Items :</Typography>
 
-              <Typography sx={{fontWeight:700,color:"navy"}}>
+              <Typography sx={{ fontWeight: 700, color: "navy" }}>
                 {totalItems}
               </Typography>
             </Box>
 
-            <Box sx={{display:"flex",flexDirection:"row",gap:"10px",marginTop:"20px",marginBottom:"20px"}}>
-              <Typography sx={{fontWeight:700}}>
-                Total Amount
-              </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "10px",
+                marginTop: "20px",
+                marginBottom: "20px",
+              }}
+            >
+              <Typography sx={{ fontWeight: 700 }}>Total Amount</Typography>
 
-              <Typography sx={{fontWeight:700,color:"blue"}}>
+              <Typography sx={{ fontWeight: 700, color: "blue" }}>
                 ₹{cart.totalAmount.toLocaleString()}
               </Typography>
             </Box>
 
-            <Button fullWidth variant="contained" size="large" onClick={handleCheckout} sx={{ py: 1.5,borderRadius: 3,fontWeight: 700,}}>
+            <Button
+              fullWidth
+              variant="contained"
+              size="large"
+              onClick={handleCheckout}
+              sx={{ py: 1.5, borderRadius: 3, fontWeight: 700 }}
+            >
               Place Order
             </Button>
-            
           </Paper>
         </Grid>
       </Grid>

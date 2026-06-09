@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import ProductCard from "./ProductCard";
+import ProductCardSkeleton from "./ProductCardSkeleton";
 
 const style = {
   grid:{
@@ -11,24 +11,25 @@ const style = {
   margin: "0 auto",   
   }
 }
-function ProductGrid({ products }) {
+
+function ProductGridSkeleton() {
   return (
     <Grid container sx={style.grid}>
-      {products.map((product) => (
+      {[...Array(8)].map((_, index) => (
         <Grid
           item
-          xs={12}
-          sm={6}
-          md={4}
-          lg={3}
-          key={product.id}
+          xs={12}   
+          sm={6}    
+          md={4}    
+          lg={3}    
+          key={index}
           sx={{ display: "flex" }}  
         >
-          <ProductCard product={product} />
+          <ProductCardSkeleton />
         </Grid>
       ))}
     </Grid>
   );
 }
 
-export default ProductGrid;
+export default ProductGridSkeleton;

@@ -17,9 +17,12 @@ function Navbar() {
   const { user, logout } = useAuth();
   const { cartCount, setCartCount } = useCart();
 
-  useEffect(() => {
-  fetchCartCount();
-}, []);
+ useEffect(() => {
+    if (user?.token) {
+      fetchCartCount();
+    }
+ }, [user]);
+
 console.log("ROLE:", user?.role);
 const fetchCartCount = async () => {
   try {
