@@ -253,7 +253,7 @@ function CartPage() {
 
             <Box sx={{display:"flex",flexDirection:"row",gap:"10px",marginTop:"20px",marginBottom:"20px"}}>
               <Typography sx={{fontWeight:700}}>
-                Total Amount :
+                Total Amount
               </Typography>
 
               <Typography sx={{fontWeight:700,color:"blue"}}>
