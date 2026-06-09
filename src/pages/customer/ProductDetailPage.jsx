@@ -25,8 +25,8 @@ function ProductDetailPage() {
   const navigate = useNavigate();
   const { setCartCount } = useCart();
 
-  const [product, setProduct] =
-    useState(null);
+  const [product, setProduct] = useState(null);
+  const [loading,setloading] = useState(false);
 
   useEffect(() => {
     loadProduct();
@@ -44,6 +44,7 @@ function ProductDetailPage() {
     }
 
     try {
+      setloading(true);
       await cartService.addToCart({productId: product.id,quantity: 1,});
       const cart = await cartService.getCart();
       const totalItems = cart.items?.length || 0;
@@ -52,7 +53,9 @@ function ProductDetailPage() {
     } catch (error) {
       console.error(error);
     }
-
+    finally{
+      setloading(false)
+    }
   };
 
   if (!product) {
@@ -154,7 +157,7 @@ return (
                 fontWeight: 700,
               }}
             >
-              Add To Cart
+              {loading?"Adding...":"Add to Cart"}
             </CustomButton>
           )}
           </Stack>

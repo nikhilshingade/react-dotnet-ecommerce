@@ -21,6 +21,7 @@ function EditProductPage() {
   const { id } = useParams();
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [load,setload] = useState(false)
 
   const [form, setForm] = useState({
     name: "",
@@ -68,7 +69,8 @@ function EditProductPage() {
 
   const handleSubmit = async () => {
     try {
-      await productService.update(id,
+        setload(true);
+        await productService.update(id,
         {
             ...form,
             price: Number(form.price),
@@ -80,6 +82,9 @@ function EditProductPage() {
       navigate("/admin/products");
     } catch (error) {
       console.error(error);
+    }
+    finally{
+        setload(false);
     }
   };
 
@@ -211,7 +216,7 @@ function EditProductPage() {
           <CustomButton
             onClick={handleSubmit}
           >
-            Update Product
+            {load?"Updating.......":"Update Product"}
           </CustomButton>
         </Stack>
       </Paper>

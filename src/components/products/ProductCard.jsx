@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import cartService from "../../services/cartService";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
+import { useState } from "react";
 
 const style = {
   cardbox:{
@@ -118,6 +119,7 @@ function ProductCard({ product }) {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { setCartCount } = useCart();
+  const [loading, setloading] = useState(false);
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
@@ -127,6 +129,7 @@ function ProductCard({ product }) {
       return;
     }
     try {
+      setloading(true);
       await cartService.addToCart({ productId: product.id, quantity: 1 });
       const cart = await cartService.getCart();
       const totalItems = cart.items?.length || 0;
@@ -134,6 +137,9 @@ function ProductCard({ product }) {
       alert("Added to cart");
     } catch (error) {
       console.error(error);
+    }
+    finally{
+      setloading(false)
     }
   };
 
@@ -267,7 +273,7 @@ function ProductCard({ product }) {
               "&:hover": { boxShadow: "0 4px 14px rgba(25,118,210,0.3)" },
             }}
           >
-            {isInStock ? "Add to Cart" : "Notify Me"}
+            {loading?"Adding..":isInStock ? "Add to Cart" : "Notify Me"}
           </CustomButton>
         )}
       </CardContent>

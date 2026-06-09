@@ -17,6 +17,7 @@ import { useAuth } from "../../context/AuthContext";
 function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
     email: "",
@@ -25,11 +26,15 @@ function LoginPage() {
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const result = await authService.login({email: form.email, password: form.password,});
       login(result);
       navigate("/");
     } catch (error) {
       console.error(error);
+    }
+    finally{
+      setLoading(false)
     }
   };
 
@@ -70,7 +75,7 @@ function LoginPage() {
           />
 
           <CustomButton onClick={handleSubmit}          >
-            Login
+            {loading?"Logging In..":"Login"}
           </CustomButton>
         </Stack>
       </Paper>

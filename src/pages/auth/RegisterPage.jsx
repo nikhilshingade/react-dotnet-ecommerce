@@ -14,7 +14,7 @@ import authService from "../../services/authService";
 
 function RegisterPage() {
   const navigate = useNavigate();
-
+  const [loading,setloading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -23,6 +23,7 @@ function RegisterPage() {
 
   const handleSubmit = async () => {
     try {
+      setloading(true);
       await authService.register(form);
 
       alert("Registration Successful");
@@ -30,6 +31,9 @@ function RegisterPage() {
       navigate("/login");
     } catch (error) {
       console.error(error);
+    }
+    finally{
+      setloading(false)
     }
   };
 
@@ -89,7 +93,7 @@ function RegisterPage() {
           <CustomButton
             onClick={handleSubmit}
           >
-            Register
+            {loading?"Creating Account..":"Register"}
           </CustomButton>
         </Stack>
       </Paper>

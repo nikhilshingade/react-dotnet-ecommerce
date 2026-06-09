@@ -17,7 +17,7 @@ import categoryService from "../../services/categoryService";
 
 function CreateProductPage() {
   const navigate = useNavigate();
-
+  const [loading,setloading] = useState(false);
   const [categories, setCategories] =
     useState([]);
 
@@ -47,6 +47,7 @@ function CreateProductPage() {
 
   const handleSubmit = async () => {
     try {
+      setloading(true)
       await productService.create({
         ...form,
         price: Number(form.price),
@@ -59,6 +60,9 @@ function CreateProductPage() {
       navigate("/admin/products");
     } catch (error) {
       console.error(error);
+    }
+    finally{
+      setloading(false)
     }
   };
 
@@ -170,7 +174,7 @@ function CreateProductPage() {
           <CustomButton
             onClick={handleSubmit}
           >
-            Create Product
+            {loading?"Creating...":"Create Product"}
           </CustomButton>
         </Stack>
       </Paper>

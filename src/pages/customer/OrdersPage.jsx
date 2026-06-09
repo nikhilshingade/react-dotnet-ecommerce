@@ -12,7 +12,7 @@ import cartService from "../../services/cartService";
 
 function OrdersPage() {
   const [orders, setOrders] = useState([]);
-
+  const [loading,setloading] = useState(true);
   const { setCartCount } = useCart();
 
   useEffect(() => {
@@ -31,19 +31,24 @@ function OrdersPage() {
     } catch (error) {
       console.error(error);
     }
+    finally{
+      setloading(false)
+    }
   };
 
   return (
-    <Container sx={{ py: 5 }}>
+    <Container sx={{ py: 5,}}>
       <Typography
         variant="h4"
         fontWeight={700}
         mb={4}
+        sx={{ marginBottom:"15px",}}
       >
         My Orders
       </Typography>
 
-      <Stack spacing={3}>
+      {loading?(<Typography>Loading...</Typography>):
+      (<Stack spacing={3}>
         {orders.map((order) => (
           <Paper
             key={order.orderId}
@@ -69,6 +74,7 @@ function OrdersPage() {
           </Paper>
         ))}
       </Stack>
+      )}
     </Container>
   );
 }

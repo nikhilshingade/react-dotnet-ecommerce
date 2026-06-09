@@ -31,12 +31,7 @@ const fetchCartCount = async () => {
     }
 };
 
-const menuItems =
-  user?.role === "Admin"
-    ? ["Home", "Admin Panel"]
-    : user?.role === "User"
-    ? ["Home", "Orders"]
-    : ["Home"];
+const menuItems = user?.role === "Admin" ? ["Home", "Admin Panel"] : user?.role === "User"? ["Home", "Orders"] : ["Home"];
 
   return (
     <>
