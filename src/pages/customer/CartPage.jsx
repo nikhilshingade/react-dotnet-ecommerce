@@ -139,7 +139,7 @@ function CartPage() {
                   }}
                 />
 
-                <Box flex={1}>
+                <Box flex={1} sx={{display:"flex",flexDirection:"column",gap:"10px",width:"100%"}}>
                   <Typography
                     variant="h6"
                     fontWeight={700}
@@ -154,38 +154,38 @@ function CartPage() {
                     {item.price.toLocaleString()}
                   </Typography>
 
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    spacing={1}
-                    mt={2}>
+                  <Stack sx={{width:"100%",display:"flex",flexDirection:"row",alignItems:"center", justifyContent:"space-between"}}>
                     <Button
                         variant="outlined"
-                        size="small"
                         onClick={() => handleDecrease(item)}
                         sx={{
-                        minWidth: 36,
-                        borderRadius: 2,
+                        minWidth: 39,
+                        width: 39,
+                        height: 34,
+                        p: 0,
+                        borderRadius: 1,
                         }}
                     >
                         <RemoveIcon />
                     </Button>
 
                     <Typography
-                        fontWeight={700}
                         minWidth={30}
-                        textAlign="center"
+                        textAlign="center"   
+                        sx={{fontSize:"20px",fontWeight:600,}}                     
                     >
                         {item.quantity}
                     </Typography>
 
                     <Button
                         variant="outlined"
-                        size="small"
                         onClick={() => handleIncrease(item)}
                         sx={{
-                        minWidth: 36,
-                        borderRadius: 2,
+                        minWidth: 39,
+                        width: 39,
+                        height: 34,
+                        p: 0,
+                        borderRadius: 1,
                         }}
                     >
                         <AddIcon />
@@ -199,7 +199,7 @@ function CartPage() {
                             quantity: 1,
                         })
                         }
-                        sx={{ ml: 2 }}
+                        sx={{  }}
                     >
                         <DeleteOutlineIcon />
                     </Button>
@@ -235,47 +235,29 @@ function CartPage() {
                 "0 4px 20px rgba(0,0,0,0.08)",
             }}
           >
-            <Typography
-              variant="h6"
-              fontWeight={700}
-              mb={2}
-            >
+            <Typography variant="h6" fontWeight={700}  mb={3}>
               Order Summary
             </Typography>
 
             <Divider sx={{ mb: 2 }} />
 
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              mb={2}
-            >
-              <Typography>
-                Total Items
+            <Box sx={{display:"flex",flexDirection:"row",gap:"10px"}}>
+              <Typography sx={{fontWeight:700}}>
+                Total Items :  
               </Typography>
 
-              <Typography>
+              <Typography sx={{fontWeight:700,color:"navy"}}>
                 {totalItems}
               </Typography>
             </Box>
 
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              mb={3}
-            >
-              <Typography
-                fontWeight={700}
-              >
-                Total Amount
+            <Box sx={{display:"flex",flexDirection:"row",gap:"10px",marginTop:"20px",marginBottom:"20px"}}>
+              <Typography sx={{fontWeight:700}}>
+                Total Amount :
               </Typography>
 
-              <Typography
-                color="primary"
-                fontWeight={700}
-              >
-                ₹
-                {cart.totalAmount.toLocaleString()}
+              <Typography sx={{fontWeight:700,color:"blue"}}>
+                ₹{cart.totalAmount.toLocaleString()}
               </Typography>
             </Box>
 
