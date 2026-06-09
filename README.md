@@ -57,7 +57,7 @@ A full-stack E-Commerce application built using React, Material UI, .NET 8 Web A
 
 ## Screenshots
 
-(Add screenshots here after deployment)
+
 
 ## Author
 
