@@ -31,7 +31,12 @@ const fetchCartCount = async () => {
     }
 };
 
-const menuItems = user?.role === "Admin" ? ["Home", "Admin Panel"] : ["Home", "Orders"];
+const menuItems =
+  user?.role === "Admin"
+    ? ["Home", "Admin Panel"]
+    : user?.role === "User"
+    ? ["Home", "Orders"]
+    : ["Home"];
 
   return (
     <>
@@ -157,6 +162,7 @@ const menuItems = user?.role === "Admin" ? ["Home", "Admin Panel"] : ["Home", "O
       >
         <Box sx={{ width: 250 }}>
           <List>
+            
             {menuItems.map((item) => (
               <ListItem disablePadding key={item}>
                 <ListItemButton
@@ -175,6 +181,32 @@ const menuItems = user?.role === "Admin" ? ["Home", "Admin Panel"] : ["Home", "O
                 </ListItemButton>
               </ListItem>
             ))}
+
+            {!user?.token && (
+              <>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    onClick={() => {
+                      setOpen(false);
+                      navigate("/login");
+                    }}
+                  >
+                    <ListItemText primary="Login" />
+                  </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                  <ListItemButton
+                    onClick={() => {
+                      setOpen(false);
+                      navigate("/register");
+                    }}
+                  >
+                    <ListItemText primary="Register" />
+                  </ListItemButton>
+                </ListItem>
+              </>
+            )}
 
             <ListItem disablePadding>
               {user?.role !== "Admin" &&
