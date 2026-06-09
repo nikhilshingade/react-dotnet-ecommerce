@@ -1,8 +1,64 @@
-# React + Vite
+# E-Commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack E-Commerce application built using React, Material UI, .NET 8 Web API, Entity Framework Core, and PostgreSQL.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Customer Features
+- User Registration & Login
+- JWT Authentication & Authorization
+- Product Listing & Filtering
+- Product Details Page
+- Shopping Cart Management
+- Quantity Update & Remove Items
+- Place Orders
+- Order History
+
+### Admin Features
+- Role-Based Access Control
+- Product Management Dashboard
+- Create Products
+- Edit Products
+- Delete Products
+- Category Management
+
+## Tech Stack
+
+### Frontend
+- React
+- React Router
+- Material UI
+- Axios
+- Context API
+
+### Backend
+- .NET 8 Web API
+- Entity Framework Core
+- Clean Architecture
+- Repository Pattern
+- JWT Authentication
+- Refresh Tokens
+
+### Database
+- PostgreSQL (Neon)
+
+### Deployment
+- Backend: Render
+- Database: Neon PostgreSQL
+- Frontend: Vercel
+
+## Project Architecture
+
+- Clean Architecture
+- Layered Design
+- Repository Pattern
+- DTO-Based Communication
+- Role-Based Authorization
+
+## Screenshots
+
+(Add screenshots here after deployment)
+
+## Author
+
+Nikhil Shingade
